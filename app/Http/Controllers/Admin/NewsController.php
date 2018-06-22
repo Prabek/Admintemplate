@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\News;
+use App\Catagory;
 
 class NewsController extends Controller
 {
@@ -27,7 +28,8 @@ class NewsController extends Controller
     public function create()
     {
         //
-         return view('admin.news.create');
+        $arr['catagory'] = Catagory::all();
+         return view('admin.news.create')->with($arr);
     }
 
     /**
@@ -39,14 +41,23 @@ class NewsController extends Controller
     public function store(Request $request, News $news)
     {
         //
-        if($request->image->getClientOriginalName()){
+        if(isset($request->image) && $request->image->getClientOriginalName()){
             $ext = $request->image->getClientOriginalExtension();
             $file = date('YmdHis').rand(1,999999).'.'.$ext;
             $request->image->storeAs('public/news',$file);
 
                          }
 
+            else
+            {
+                $file = '';
+
+            }
+
+
+
          $news->news_title = $request->news_title;
+         $news->catagory_id = $request->catagory_id;  
          $news->author = $request->author;
          $news->description = $request->description;
          $news->image = $file;
@@ -76,6 +87,7 @@ class NewsController extends Controller
     {
         //
         $arr['news'] = $news;
+        $arr['catagory'] = Catagory::all();
         return view('admin.news.edit')->with($arr);
     }
 
@@ -89,12 +101,21 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         //
-        if($request->image->getClientOriginalName()){
+        if(isset($request->image) && $request->image->getClientOriginalName()){
             $ext = $request->image->getClientOriginalExtension();
             $file = date('YmdHis').rand(1,999999).'.'.$ext;
             $request->image->storeAs('public/news',$file);
 
                          }
+
+             else 
+             {
+                if(!$news->image)
+                    $file ='';
+                else
+                    $file = $news->image;
+             }  
+           $news->catagory_id = $request->catagory_id;             
         $news->news_title = $request->news_title;
         $news->author = $request->author;
          $news->description = $request->description;

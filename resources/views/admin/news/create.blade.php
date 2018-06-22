@@ -38,6 +38,22 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-3">Catagory</label>
+              <div class="col-sm-6">
+                <select name="catagory_id" class="form-control">
+                  <option value="">choose catagory</option>
+                  @foreach($catagory as $c)
+                  <option value="{{$c->id}}">{{$c->cat_title}}</option>
+                  @endforeach
+                </select>
+                <br/>
+              <div class="clearfix"></div>
+              
+            </div>
+          </div>
+
          <div class="form-group">
             <div class="row">
               <label class="col-sm-3">Description</label>

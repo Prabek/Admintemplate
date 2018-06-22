@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Add Catagory</h1>
+            <h1 class="m-0 text-dark">Edit News</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -39,6 +39,27 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-3">Catagory</label>
+              <div class="col-sm-6">
+                <select name="catagory_id" class="form-control">
+                  <option value="">choose catagory</option>
+                  @foreach($catagory as $c)
+                  <option value="{{$c->id}}" 
+
+                    @if($c->id == $news->catagory_id)
+                    selected
+                     @endif
+                    >
+                    {{$c->cat_title}}</option>
+                  @endforeach
+                </select>
+                <br/>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
          <div class="form-group">
             <div class="row">
               <label class="col-sm-3">Description</label>
@@ -47,6 +68,7 @@
               <br/>
               
             </div>
+          </div>
          
 
           <div class="form-group">
@@ -55,7 +77,7 @@
               <div class="col-sm-6"><input type="file" name="image"></div>
               <div class="clearfix"></div>
 
-              <td><img src="{{asset('storage/news/'.$news->image)}}" style="width:150px; height: 150px;"></td>
+              <td class="col-span-3"><img src="{{asset('storage/news/'.$news->image)}}" style="width:300px; height: 200px;"></td>
               
             </div>
           </div>
