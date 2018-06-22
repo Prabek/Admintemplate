@@ -18,7 +18,7 @@ class CatagoryController extends Controller
     public function index()
     {
         //
-        $arr['catagories'] = Catagory::all();
+        $arr['catagories'] = Catagory::paginate(5);
         return view('admin.catagories.index')->with($arr);
     }
 

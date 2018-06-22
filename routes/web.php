@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();  
 
-Route::get('/admin', 'HomeController@index')->name('home');
-Route::resource('/admin/catagory', 'Admin\CatagoryController', ['as'=>'admin']);
-Route::resource('/admin/news', 'Admin\NewsController', ['as'=>'admin']);
+Route::namespace('Admin')->prefix('admin')->as('admin.')->middleware('auth')->group(function(){
 
+			Route::get('', 'HomeController@index')->name('home');
+			Route::resource('catagory', 'CatagoryController');
+			Route::resource('news', 'NewsController');
+
+					});
