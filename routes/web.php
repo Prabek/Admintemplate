@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('/nayanepal', 'NayanepalController');
+
 
 Auth::routes();  
 
