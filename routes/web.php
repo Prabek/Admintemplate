@@ -14,7 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('/nayanepal', 'NayanepalController');
+Route::get('nayanepal', 'NayanepalController@index');
+Route::get('nayanepal/{id}', [
+	'uses'=>'NayanepalController@showdetail',
+	'as'=>'user.showdetail'
+
+]);
+Route::get('nayanepal/c/{id}', [
+	'uses'=>'NayanepalController@show',
+	'as'=>'user.show'
+
+]);
+
 
 
 Auth::routes();  
