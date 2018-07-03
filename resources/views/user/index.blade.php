@@ -25,7 +25,7 @@
   <div class="carousel-inner">
     
     <div class="carousel-item active">
-     <center><img src="{{asset('storage/news/'.$n->image)}}" alt="Los Angeles" width="1100" height="500"> </center> 
+     <center><img src="{{asset('storage/news/'.$n->image)}}" alt="Los Angeles" style="width: 100%; height: 70%;"> </center> 
      <div class="carousel-caption">
         <h3>{{$n->news_title}}</h3>
         <p><a class="btn btn-primary btn-lg" href="{{route('user.showdetail',$n->id)}}" role="button">Learn more &raquo;</a></p>
@@ -33,7 +33,7 @@
     </div>
     @foreach($news as $n)
     <div class="carousel-item">
-      <center><img src="{{asset('storage/news/'.$n->image)}}" alt="Los Angeles" width="1100" height="500"></center>
+      <center><img src="{{asset('storage/news/'.$n->image)}}" alt="Los Angeles" style="width: 100%; height: 70%;"></center>
 
       <div class="carousel-caption">
         <h3>{{$n->news_title}}</h3>
@@ -76,11 +76,11 @@
           <div class="row" style="background-color:hsl(0, 100%, 25%);" >
             @foreach($c->news as $n)
             <div class="col-md-4">
-             <center><h6><font color="white">{{$n->news_title}}</font></h6></center>
+             <center><h6><font color="white">{{str_limit($n->news_title,30)}}</font></h6></center>
               <div class="card mb-4 box-shadow">
                 <CENTER><a href="{{route('user.showdetail',$n->id)}}"><img src="{{asset('storage/news/'.$n->image)}}"   style="width:240px; height: 170px;"></a></CENTER>
                 <div class="card-body">
-                  <p class="card-text">{{$n->description}}</p>
+                  <p class="card-text">{{str_limit($n->description,50)}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <center><a href="{{route('user.showdetail',$n->id)}}"><button type="button" class="btn btn-sm btn-outline-secondary">View More</button></a></center>
@@ -118,6 +118,8 @@
                 <div class="media-body">
                   <a href="{{route('user.showdetail',$n->id)}}">{{$n->news_title}}</a>
                   <br/>
+                  {{$n->created_at->diffForHumans()}}
+                  <br/>
                   <span class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -131,9 +133,32 @@
             <br/>
              @endforeach
              <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab">Popular News</a></li>
+            <li class="active"><h3><a data-toggle="tab">Popular News</a></h3></li>
           
           </ul>
+          @foreach($popular as $p)
+              
+              <div class="media"> 
+
+                <div class="media-left">
+                  <a href="{{route('user.showdetail',$p->id)}}"><img class="media-object"  src="{{asset('storage/news/'.$p->image)}}" style="width:130px; height:70px;"></a>
+                </div><!--media-left-->
+                <div class="media-body">
+                  <a href="{{route('user.showdetail',$p->id)}}">{{$p->news_title}}</a>
+                  <br/>
+
+                  <span class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-full"></i>
+                  </span>
+                </div><!--media-body-->
+              </div><!--media-->  
+            
+            <br/>
+             @endforeach
 
            </div>
 

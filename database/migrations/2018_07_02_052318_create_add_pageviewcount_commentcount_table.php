@@ -4,18 +4,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddViewcountTonewsTable extends Migration
+class CreateAddPageviewcountCommentcountTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
             
-            $table->integer('visit_count');
+            $table->integer('comment_count');
+            $table->integer('view_count');
         
         });
     }
@@ -29,8 +25,10 @@ class CreateAddViewcountTonewsTable extends Migration
     {
         Schema::table('news', function (Blueprint $table) {
             
-            $table->dropColumn('visit_count');
-    
+            $table->dropColumn('comment_count');
+            $table->dropColumn('view_count');
+
+        
         });
     }
 }

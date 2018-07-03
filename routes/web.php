@@ -26,6 +26,11 @@ Route::get('nayanepal/c/{id}', [
 
 ]);
 
+Route::post('search','SearchController@search')->name('search');
+
+
+
+
 
 
 Auth::routes();  
